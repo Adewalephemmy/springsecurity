@@ -50,6 +50,8 @@ class DatabaseLoader {
 					+ "to write double the code than in other langs? #newFavLib"));
 			
 			repository.save(new Quote("this is a new git commit"));
+
+			repository.save(new Quote("fetch this data fom repository save"));
 		};
 	}
 }
