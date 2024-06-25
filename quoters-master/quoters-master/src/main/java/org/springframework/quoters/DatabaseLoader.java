@@ -48,6 +48,8 @@ class DatabaseLoader {
 			repository.save(new Quote("I have two hours today to build an app from scratch. @springboot to the rescue!"));
 			repository.save(new Quote("@springboot with @springframework is pure productivity! Who said in #java one has "
 					+ "to write double the code than in other langs? #newFavLib"));
+			
+			repository.save(new Quote("this is a new git commit"));
 		};
 	}
 }
