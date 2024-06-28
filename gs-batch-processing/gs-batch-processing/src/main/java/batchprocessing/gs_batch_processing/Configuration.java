@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -13,10 +14,18 @@ import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @org.springframework.context.annotation.Configuration
+@EnableBatchProcessing
 public class Configuration {
+	@Bean
+    public JobCompletionNotificationListener jobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
+        return new JobCompletionNotificationListener(jdbcTemplate);
+    }
+
+	
 	@Bean
 	public FlatFileItemReader<Person> reader() {
 	  return new FlatFileItemReaderBuilder<Person>()
@@ -60,4 +69,9 @@ public class Configuration {
 	    .writer(writer)
 	    .build();
 	}
+	
+//	 @Bean
+//	    public JobCompletionNotificationListener jobCompletionNotificationListener() {
+//	        return new JobCompletionNotificationListener();
+//	    }
 }
